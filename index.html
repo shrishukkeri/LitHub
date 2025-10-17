@@ -2,46 +2,93 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Viewport & Safe Area Fix -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- iOS Fullscreen Mode -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <title>LitHub - The Future of Research is Coming Soon</title>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <!-- Inter Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    html, body {
       font-family: 'Inter', sans-serif;
       background: radial-gradient(circle at top, #212938 0%, #152132 80%);
       color: #212938;
       margin: 0;
-      height: 100vh;
+      padding: 0;
+      height: 100%;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
+      background-color: #212938;
     }
+
+    
+
+    /* Safe area padding for iPhones */
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
     .header-glow {
-      box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -2px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.05),
+                  0 2px 4px -2px rgba(255, 255, 255, 0.05);
     }
+
     .cta-card {
       background-color: rgba(22, 27, 34, 0.8);
       border: 1px solid #30363d;
-      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(8px);
     }
+
     .main-wrapper {
       flex-grow: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
+      /* Fixed padding calculation - account for header height and safe area */
       padding: 1rem;
     }
+
     .fade-in {
       animation: fadeIn 1.2s ease-in-out;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mobile-specific centering */
+    @media (max-width: 768px) {
+      .mobile-centered {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+      }
+      
+      .mobile-title {
+        margin-top: 20px;
+        margin-bottom: auto;
+      }
+      
+      .mobile-content {
+        margin-top: 20px;
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -58,57 +105,60 @@
 
   <!-- Main Content -->
   <main class="main-wrapper fade-in">
-    <div class="max-w-5xl space-y-6">
-
-      <!-- Title -->
-      <div class="space-y-4">
+    <div class="max-w-5xl w-full mobile-centered">
+      
+      <!-- Title Section - Centered on Mobile -->
+      <div class="space-y-4 mobile-title">
         <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white">
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-amber-500">
             Ignite Your Research
           </span><br>
-          LitHub is Coming Soon!
+          <span class="sm:inline">LitHub is Coming Soon!</span>
         </h1>
         <p class="text-xl sm:text-2xl text-gray-400">
           The all-in-one academic literature hub!
         </p>
       </div>
 
-      <!-- Core Features -->
-      <div class="grid md:grid-cols-3 gap-6 text-left pt-4 px-4">
-        <div class="p-5 rounded-xl cta-card transition duration-300 hover:scale-[1.02] hover:border-amber-500/50">
-          <svg class="w-8 h-8 text-amber-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-          <h3 class="text-lg font-semibold text-white mb-2">Smart Discovery</h3>
-          <p class="text-gray-400 text-sm">Access papers from <strong>popular academic databases</strong> using simple keywords, and seamlessly add them to your personalized research space.</p>
+      <!-- Rest of Content - Below on Mobile -->
+      <div class="mobile-content">
+        <!-- Core Features -->
+        <div class="grid md:grid-cols-3 gap-6 text-left pt-8 md:pt-4 px-4">
+          <div class="p-5 rounded-xl cta-card transition duration-300 hover:scale-[1.02] hover:border-amber-500/50">
+            <svg class="w-8 h-8 text-amber-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <h3 class="text-lg font-semibold text-white mb-2">Smart Discovery</h3>
+            <p class="text-gray-400 text-sm">Access papers from <strong>popular academic databases</strong> using simple keywords, and seamlessly add them to your personalized research space.</p>
+          </div>
+
+          <div class="p-5 rounded-xl cta-card transition duration-300 hover:scale-[1.02] hover:border-amber-500/50">
+            <svg class="w-8 h-8 text-amber-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l2-2 2 2v13"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21V19"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13V6l2-2 2 2v7"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19h2"/></svg>
+            <h3 class="text-lg font-semibold text-white mb-2">AI-Powered Analysis</h3>
+            <p class="text-gray-400 text-sm">Analyze your collected literature to quickly identify research <strong>gaps and scope</strong> based on your custom prompts and goals.</p>
+          </div>
+
+          <div class="p-5 rounded-xl cta-card transition duration-300 hover:scale-[1.02] hover:border-amber-500/50">
+            <svg class="w-8 h-8 text-amber-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+            <h3 class="text-lg font-semibold text-white mb-2">Publish-Ready Output</h3>
+            <p class="text-gray-400 text-sm">Generate comprehensive <strong>literature surveys and research papers</strong> with accurate citations and formatting for IEEE, Springer, and more.</p>
+          </div>
         </div>
 
-        <div class="p-5 rounded-xl cta-card transition duration-300 hover:scale-[1.02] hover:border-amber-500/50">
-          <svg class="w-8 h-8 text-amber-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l2-2 2 2v13"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21V19"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 13V6l2-2 2 2v7"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19h2"/></svg>
-          <h3 class="text-lg font-semibold text-white mb-2">AI-Powered Analysis</h3>
-          <p class="text-gray-400 text-sm">Analyze your collected literature to quickly identify research <strong>gaps and scope</strong> based on your custom prompts and goals.</p>
-        </div>
+        <!-- CTA -->
+        <div class="pt-8 md:pt-6">
+          <h2 class="text-2xl sm:text-3xl font-semibold text-white mb-2">Be the First to Know</h2>
+          <p class="text-gray-400 mb-4 text-sm sm:text-base">Join our early access list and get notified the moment LitHub launches. No spam, just smarter research.</p>
 
-        <div class="p-5 rounded-xl cta-card transition duration-300 hover:scale-[1.02] hover:border-amber-500/50">
-          <svg class="w-8 h-8 text-amber-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-          <h3 class="text-lg font-semibold text-white mb-2">Publish-Ready Output</h3>
-          <p class="text-gray-400 text-sm">Generate comprehensive <strong>literature surveys and research papers</strong> with accurate citations and formatting for IEEE, Springer, and more.</p>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="pt-6">
-        <h2 class="text-2xl sm:text-3xl font-semibold text-white mb-2">Be the First to Know</h2>
-        <p class="text-gray-400 mb-4 text-sm sm:text-base">Join our early access list and get notified the moment LitHub launches. No spam, just smarter research.</p>
-
-        <div class="max-w-xl mx-auto cta-card p-5 rounded-2xl space-y-3">
-          <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row gap-3">
-            <input type="email" id="emailInput" placeholder="Enter your academic email address" required
-                   class="flex-grow p-3 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition duration-150 shadow-inner">
-            <button type="submit" id="subscribeButton"
-                    class="w-full sm:w-auto px-6 py-3 rounded-lg font-bold text-gray-900 bg-amber-400 hover:bg-amber-500 transition duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-amber-500/50">
-              Get Early Access
-            </button>
-          </form>
-          <p id="messageBox" class="text-sm mt-2"></p>
+          <div class="max-w-xl mx-auto cta-card p-5 rounded-2xl space-y-3">
+            <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row gap-3">
+              <input type="email" id="emailInput" placeholder="Enter your academic email address" required
+                     class="flex-grow p-3 rounded-lg border border-gray-600 bg-gray-800 text-white placeholder-gray-400 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition duration-150 shadow-inner">
+              <button type="submit" id="subscribeButton"
+                      class="w-full sm:w-auto px-6 py-3 rounded-lg font-bold text-gray-900 bg-amber-400 hover:bg-amber-500 transition duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-amber-500/50">
+                Get Early Access
+              </button>
+            </form>
+            <p id="messageBox" class="text-sm mt-2"></p>
+          </div>
         </div>
       </div>
 
